@@ -7,7 +7,7 @@ const EditModal = ({ content, open, onClose, onUpdate }) => {
   const [formData, setFormData] = useState(content);
   const [changed, setChanged] = useState(false);
   const [initial, setInitial] = useState(formData);
-
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInitial(formData);
@@ -22,7 +22,7 @@ const EditModal = ({ content, open, onClose, onUpdate }) => {
   const handleSubmit = async (id, updatedContent) => {
     try {
         await axios.put(
-            `http://localhost:5000/api/messages/${id}`,
+            `${Backend_url}api/messages/${id}`,
             { content: updatedContent },
             { withCredentials: true }
         );

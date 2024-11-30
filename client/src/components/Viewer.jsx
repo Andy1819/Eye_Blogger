@@ -8,12 +8,12 @@ const ViewerPage = () => {
   const [messages, setMessages] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(null);
-
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const navigate = useNavigate();
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/messages', {withCredentials: true});
+      const response = await axios.get(`${Backend_url}api/messages`, {withCredentials: true});
       setMessages(response.data);
     } catch (error) {
       toast.error('Failed to fetch messages');

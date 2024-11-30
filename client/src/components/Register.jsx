@@ -7,6 +7,7 @@ import axios from 'axios';
 const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phoneNumber: '', password: '', role: 'viewer' });
   const navigate = useNavigate();
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -38,7 +39,7 @@ const Register = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData, { withCredentials: true });
+      const response = await axios.post(`${Backend_url}api/auth/register`, formData, { withCredentials: true });
       toast.success(response.data);
       navigate('/');
     } catch (error) {

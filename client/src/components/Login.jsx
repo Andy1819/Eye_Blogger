@@ -11,11 +11,11 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData, { withCredentials: true });
+      const response = await axios.post(`${Backend_url}api/auth/login`, formData, { withCredentials: true });
       toast.success(response.data.message);
       console.log(response.data.message);
       if(response.data.role === 'admin') {

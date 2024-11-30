@@ -14,10 +14,10 @@ const AdminPage = () => {
   const [currentMessage, setCurrentMessage] = useState(null);
   const itemsPerPage = 5;
   const navigate = useNavigate();
-
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const fetchUsers = async (status, setUsers) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/admin/users?status=${status}`, {withCredentials: true});
+      const response = await axios.get(`${Backend_url}api/admin/users?status=${status}`, {withCredentials: true});
       setUsers(response.data);
     } catch (error) {
       toast.error('Failed to fetch users');
@@ -26,7 +26,7 @@ const AdminPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/messages', {withCredentials: true});
+      const response = await axios.get(`${Backend_url}api/messages`, {withCredentials: true});
       // console.log(response.data);
       setMessages(response.data);
     } catch (error) {
@@ -36,7 +36,7 @@ const AdminPage = () => {
 
   const handleStatusChange = async (userId, status) => {
     try {
-      await axios.patch(`http://localhost:5000/api/admin/users/${userId}/status`, { status }, {withCredentials: true});
+      await axios.patch(`${Backend_url}api/admin/users/${userId}/status`, { status }, {withCredentials: true});
       toast.success(`User ${status} successfully`);
       fetchUsers('requested', setRequestedUsers);
       fetchUsers('accepted', setAcceptedUsers);

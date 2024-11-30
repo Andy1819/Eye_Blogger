@@ -11,13 +11,13 @@ const EditorPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(null);
   const [openEditForm, setOpenEditForm] = useState(false);
-
+  const Backend_url = 'https://eye-blogger-backend.vercel.app/';
   const { id: userId } = useParams();
   const navigate = useNavigate();
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/messages', { withCredentials: true });
+      const response = await axios.get(`${Backend_url}api/messages`, { withCredentials: true });
       setMessages(response.data);
     } catch (error) {
       toast.error('Failed to fetch messages');
@@ -31,7 +31,7 @@ const EditorPage = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/messages/create',
+        `${Backend_url}api/messages/create`,
         { content: newMessage },
         { withCredentials: true }
       );
@@ -54,7 +54,7 @@ const EditorPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/messages/${id}`, { withCredentials: true });
+      await axios.delete(`${Backend_url}api/messages/${id}`, { withCredentials: true });
       fetchMessages();
       toast.success('Message deleted');
     } catch (error) {

@@ -3,6 +3,7 @@ const User = require('../models/User');
 // Fetch users by status
 const getUsersByStatus = async (req, res) => {
   try {
+    console.log('Headers:', req.headers);
     const { status } = req.query;
     const users = await User.find({ status });
     res.status(200).json(users);
